@@ -1,0 +1,10 @@
+[tool.black]
+line-length = 100
+
+[tool.pyright]
+pythonVersion = '3.9.9'
+reportMissingImports = true
+reportMissingTypeStubs = false
+disableOrganizeImports = true
+pythonPlatform = 'Darwin'
+typeCheckingMode = 'basic'

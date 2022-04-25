@@ -1,0 +1,11 @@
+{
+    "overrides": [
+        {
+            "files": ["*.yaml", "*.json"],
+            "options": {
+                "tabWidth": 4,
+                "signleQuote": false
+            }
+        }
+    ]
+}
