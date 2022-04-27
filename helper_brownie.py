@@ -42,34 +42,34 @@ def get_account(index=None, id=None, wallet=None):
 def get_mock(_provider: str = "", _service: str = "", _id: str = "", _name: str = ""):
 
     if network.show_active() not in CHAINS["local"]:
-        raise error(f"You are on {network.show_active()}. Switch to development.")
-
-    MOCK = {
-        "chainlink": {
-            "api_consumer": {
-                "link_token": LinkToken,
-                "1": {
-                    "oracle": MockOracle,
+        pass
+    else:
+        MOCK = {
+            "chainlink": {
+                "api_consumer": {
+                    "link_token": LinkToken,
+                    "0": {
+                        "oracle": MockOracle,
+                    },
                 },
-            },
-            "price_consumer_v3": {
-                "1": {
-                    "proxy": MockV3AggregatorETHUSDT,
-                }
-            },
-            "vrf_coordinator_v2": {"1": {"vrf_coordinator": VRFCoordinatorV2Mock}},
+                "price_consumer_v3": {
+                    "0": {
+                        "proxy": MockV3AggregatorETHUSDT,
+                    }
+                },
+                "vrf_coordinator_v2": {"0": {"vrf_coordinator": VRFCoordinatorV2Mock}},
+            }
         }
-    }
 
-    contract_type = (
-        MOCK[_provider][_service][_id][_name] if _id else MOCK[_provider][_service][_name]
-    )
+        contract_type = (
+            MOCK[_provider][_service][_id][_name] if _id else MOCK[_provider][_service][_name]
+        )
 
-    if len(contract_type) <= 0:
-        deploy_mocks()
-    contract = contract_type[-1]
+        if len(contract_type) <= 0:
+            deploy_mocks()
+        contract = contract_type[-1]
 
-    return contract
+        return contract
 
 
 DECIMALS = 18
